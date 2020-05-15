@@ -33,7 +33,7 @@ int main()
 
   struct sockaddr_in writer_addr;
 
-
+  pid_t pid_num = 1;
 
   /* ソケットの生成 */
 
@@ -55,9 +55,7 @@ int main()
 
   reader_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-  reader_addr.sin_port = htons(9001);
-
-
+  reader_addr.sin_port = htons(9000);
 
   /* ソケットにアドレスを結びつける */
 
@@ -87,11 +85,17 @@ int main()
 
   /* コネクト要求を待つ */
 
-  if ((new_sockfd = accept(sockfd,(struct sockaddr *)&writer_addr, (socklen_t *) &writer_len)) < 0) {
+  while(0 != pid_num){
 
-    perror("reader: accept");
+    if ((new_sockfd = accept(sockfd,(struct sockaddr *)&writer_addr, (socklen_t *) &writer_len)) < 0) {
 
-    exit(1);
+      perror("reader: accept");
+
+      exit(1);
+
+    }
+
+    pid_num = fork();
 
   }
 
