@@ -5,12 +5,16 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
+#include <unistd.h>
 
+void simple_server(int new_sockfd);
 
-main()
+int main()
 {
 
-  int sockfd
+  int sockfd;
   int new_sockfd;
   int writer_len;
 
@@ -27,7 +31,7 @@ main()
   bzero((char *) &reader_addr, sizeof(reader_addr));
   reader_addr.sin_family = PF_INET;
   reader_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-  rader_addr.sin_port = htons(8000);
+  reader_addr.sin_port = htons(8001);
 
   /* ソケットにアドレスを結びつける */
   if(bind(sockfd, (struct sockaddr *)&reader_addr, sizeof(reader_addr)) <0){
@@ -43,21 +47,26 @@ main()
   }
 
   /* コネクト要求を待つ */
+  /* 他のソケットを割り当てる */
   if((new_sockfd = accept(sockfd,(struct sockaddr *)&writer_addr, &writer_len)) < 0){
 	  perror("reader:accept");
 	  exit(1);
   }
+
+  /* 読み取り 書き込み */
+  simple_server(new_sockfd);
+
   /* ソケット閉鎖 */
   close(sockfd);
 }
 
 
 
-void simpe_server(int sckfd){
+void simple_server(int new_sockfd){
 	char buf[1];
 	int buf_len;
 	while((buf_len = read(new_sockfd, buf, 1)) > 0){
-		write(1,buf,buf_len);
+		write(new_sockfd,buf,buf_len);
 	}
 	close(new_sockfd);
 }
