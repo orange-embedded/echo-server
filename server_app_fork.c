@@ -51,18 +51,16 @@ int main()
 
   /* fork関数で子プロセスを生成 */
   for(i=0; i<5; i++){
-	  pid = fork();
-	  if(pid == 0){
-		  break;
-	  }
-  }
-
-
   /* コネクト要求を待つ */
   /* 他のソケットを割り当てる */
-  if((new_sockfd = accept(sockfd,(struct sockaddr *)&writer_addr, &writer_len)) < 0){
-	  perror("reader:accept");
-	  exit(1);
+	  if((new_sockfd = accept(sockfd,(struct sockaddr *)&writer_addr, &writer_len)) < 0){
+		  perror("reader:accept");
+	  	  exit(1);
+  	  }
+  	  pid = fork();
+  	  if(pid == 0){
+  		  break;
+  	  }
   }
 
 
