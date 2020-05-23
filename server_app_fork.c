@@ -48,8 +48,6 @@ int main()
 	  exit(1);
   }
 
-
-  /* fork関数で子プロセスを生成 */
   for(i=0; i<5; i++){
   /* コネクト要求を待つ */
   /* 他のソケットを割り当てる */
@@ -57,12 +55,12 @@ int main()
 		  perror("reader:accept");
 	  	  exit(1);
   	  }
-  	  pid = fork();
-  	  if(pid == 0){
+	  /* fork関数で子プロセスを生成 */
+	  pid = fork();
+  	  if(0 == pid){
   		  break;
   	  }
   }
-
 
   tv.tv_sec = 0;
   tv.tv_usec = 1000;
