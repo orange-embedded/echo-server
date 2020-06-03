@@ -21,8 +21,8 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-          name: server_app_fork.out & client_app.out
-          path: ./
+          name: artifact
+          path: ./server_app_fork.out client_app.out
 
           
           
