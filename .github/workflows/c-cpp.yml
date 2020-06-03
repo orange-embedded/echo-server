@@ -14,4 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build
-      run: gcc client_app.c -o client_app.c
+      run: gcc client_app.c -o client_app.out
