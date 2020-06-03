@@ -15,8 +15,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: build
-      run: gcc client_app.c -o client_app.out
-           gcc server_app_fork.c -o server_app_fork.out
+      run: |
+        gcc client_app.c -o client_app.out
+        gcc server_app_fork.c -o server_app_fork.out
 
     - uses: actions/upload-artifact@v2
       with:
