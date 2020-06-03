@@ -16,8 +16,17 @@ jobs:
 
     - name: build
       run: gcc client_app.c -o client_app.out
+           gcc server_app_fork.c -o server_app_fork.out
 
     - uses: actions/upload-artifact@v2
       with:
+          name: server_app_fork.out
+          path: ./
+      with:
           name: client_app.out
           path: ./
+
+          
+          
+          
+          
