@@ -19,5 +19,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-          name: *.out
+          name: client_app.out
           path: ./
