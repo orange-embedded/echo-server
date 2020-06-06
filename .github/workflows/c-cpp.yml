@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build_client:
+  build_client_job:
 
     runs-on: ubuntu-latest
 
@@ -17,16 +17,16 @@ jobs:
 
     - name: build
       run: |
-        gcc client_app.c -o client_app.out
+        gcc ./src/client_app.c -o client_app.out
 
     - uses: actions/upload-artifact@v2
       with:
 
-          name: artifact_client
+          name: artifact_build_client_job
           path: ./*.out
 
 
-  build_server:
+  build_server_job:
 
     runs-on: ubuntu-latest
 
@@ -35,15 +35,29 @@ jobs:
 
     - name: build
       run: |
-        gcc server_app_fork.c -o server_app_fork.out
+        gcc ./src/server_app_fork.c -o server_app_fork.out
 
 
     - uses: actions/upload-artifact@v2
       with:
-          name: artifact_server
+          name: artifact_build_server_job
           path: ./*.out
 
-
-
-
+  test_job:
   
+    runs-on: ubuntu-latest
+     
+    steps:
+    - uses: actions/dowload-artifact@v2
+     
+    - name: run
+      run: |
+        ./server_app_fork.out 127.0.0.1 &
+        ./client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
+     
+    - uses: actions/upload-artifact@v2
+      with:
+          name: artifact_test_job
+          path: ./test_result.txt
+     
+
