@@ -7,7 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+
+  build_client:
 
     runs-on: ubuntu-latest
 
@@ -17,14 +18,31 @@ jobs:
     - name: build
       run: |
         gcc client_app.c -o client_app.out
-        gcc server_app_fork.c -o server_app_fork.out
 
     - uses: actions/upload-artifact@v2
       with:
-          name: artifact
+          name: artifact_client
           path: ./*.out
 
-          
-          
-          
-          
+
+  build_server:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: build
+      run: |
+        gcc server_app_fork.c -o server_app_fork.out
+
+
+    - uses: actions/upload-artifact@v2
+      with:
+          name: artifact_server
+          path: ./*.out
+
+
+
+
+  
