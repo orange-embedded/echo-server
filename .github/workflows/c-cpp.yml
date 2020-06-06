@@ -53,6 +53,7 @@ jobs:
      
     - name: run
       run: |
+        ls -R
         ./server_app_fork.out 127.0.0.1 &
         ./client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
      
