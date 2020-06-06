@@ -68,11 +68,11 @@ void send_input_data(int sockfd) {
             write(sockfd, buf, buf_len);
     	}
         //ソケットから文字を受け取り標準出力
-        if((buf_len = read(sockfd, buf, 1)) > 0){
+        if((buf_len = read(sockfd, buf, buf_len)) > 0){
             write(1, buf, buf_len);
         }
 
-        if(buf == EOF){
+        if(buf_len == 0){
         	break;
         }
 
