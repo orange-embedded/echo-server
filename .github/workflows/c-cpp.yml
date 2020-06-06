@@ -54,7 +54,6 @@ jobs:
      
     - name: run
       run: |
-        timeout --help
         sudo chmod 777 ./ -R
         ./artifact_build_server_job/server_app_fork.out 127.0.0.1 &
         timeout 20s ./artifact_build_client_job/client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
