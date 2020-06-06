@@ -74,10 +74,11 @@ jobs:
      
    steps:
    - uses: actions/checkout@v2
+   - uses: actions/download-artifact@v2
    
    - name: verify
      run: |
-        diff ./test/test_sample.txt ./test_result.txt || false 
+        diff ./test/test_sample.txt ./artifact_test_job/test_result.txt || false 
 
    needs: test_job 
 
