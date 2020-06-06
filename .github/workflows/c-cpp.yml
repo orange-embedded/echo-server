@@ -57,7 +57,7 @@ jobs:
         ls -R
         sudo chmod 777 ./ -R
         ./artifact_build_server_job/server_app_fork.out 127.0.0.1 &
-        ./artifact_build_client_job/client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
+        timeout 20s -k 10s ./artifact_build_client_job/client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
         killall server_app_fork.out
         
     - uses: actions/upload-artifact@v2
