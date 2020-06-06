@@ -54,8 +54,8 @@ jobs:
     - name: run
       run: |
         ls -R
-        ./server_app_fork.out 127.0.0.1 &
-        ./client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
+        ./artifact_build_server_job/server_app_fork.out 127.0.0.1 &
+        ./artifact_build_client_job/client_app.out 127.0.0.1 < ./test/test_sample.txt > ./test_result.txt
      
     - uses: actions/upload-artifact@v2
       with:
