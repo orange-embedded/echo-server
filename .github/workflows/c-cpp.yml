@@ -43,11 +43,9 @@ jobs:
           name: artifact_build_server_job
           path: ./*.out
 
+
   test_job:
   
-    needs: build_server_job
-    needs: client_server_job
-    
     runs-on: ubuntu-latest
      
     steps:
@@ -62,5 +60,9 @@ jobs:
       with:
           name: artifact_test_job
           path: ./test_result.txt
-     
+
+    needs: [ build_server_job, build_client_job ] 
+
+
+
 
