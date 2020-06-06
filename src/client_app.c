@@ -71,6 +71,11 @@ void send_input_data(int sockfd) {
         if((buf_len = read(sockfd, buf, 1)) > 0){
             write(1, buf, buf_len);
         }
+
+        if(buf == EOF){
+        	break;
+        }
+
     }
 
 }
