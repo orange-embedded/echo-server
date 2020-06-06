@@ -45,6 +45,9 @@ jobs:
 
   test_job:
   
+    needs: build_server_job
+    needs: client_server_job
+    
     runs-on: ubuntu-latest
      
     steps:
