@@ -47,7 +47,7 @@ jobs:
 
   test_job:
   
-    runs-on: Ubuntu
+    runs-on: ARM
      
     steps:
     - uses: actions/checkout@v2
